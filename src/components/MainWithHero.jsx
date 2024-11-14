@@ -43,6 +43,7 @@ const MainWithHero = () => {
 
                 const data = await response.json();
                 setShortenedLink(data.data.tiny_url);
+                setLink("");
                 setMessage("Link successfully shortened!");
             } catch (error) {
                 setMessage(
