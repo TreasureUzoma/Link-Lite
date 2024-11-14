@@ -5,7 +5,7 @@ LinkLite is a powerful web application built with React.js that allows users to 
 
 ## Features
 
-- Shorten url 
+- Link Shortener
 
 
 ## Tech Stack
@@ -61,4 +61,4 @@ This project is licensed under the MIT License.
 ## Contact
 
 - **GitHub**: [TreasureUzoma](https://github.com/TreasureUzoma)
-- **Twitter**: [drealdumore](https://twitter.com/TreasureUzoma)
+- **Twitter**: [TreasureUzoma1](https://twitter.com/TreasureUzoma1)
