@@ -64,13 +64,13 @@ const MainWithHero = () => {
                     <div className="flex items-center justify-center space-x-2">
                         <input
                             type="url"
-                            className="border border-1 rounded-lg w-full p-3 text-[0.8rem] font-medium placeholder:text-[#909092]"
+                            className="border border-1 rounded-lg w-full p-3 text-[0.8rem] font-medium placeholder:text-[#909092] z-40"
                             value={link}
                             onChange={handleLinkChange}
                             placeholder="Enter Website URL"
                         />
                         <button
-                            className="bg-[#474747] text-white py-3 px-4 rounded-lg text-[0.8rem]"
+                            className="bg-[#474747] text-white py-3 px-4 rounded-lg text-[0.8rem] z-40"
                             onClick={handleShortenClick}
                         >
                             Shorten
