@@ -73,12 +73,12 @@ const MainWithHero = () => {
         <div>
             <main className="h-[40rem] w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex items-center justify-center">
                 <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-                <div className="flex text-center flex-col gap-[1.75rem] w-[315px] md:w-[500px] lg:w-[680px] -mt-[4.6rem] sm:mt-0">
+                <div className="flex text-center flex-col gap-[1.75rem] w-[315px] md:w-[500px] lg:w-[680px] -mt-[4.8rem] sm:mt-[4rem]">
                     <div className="sm:mb-3">
                         <a
                             href="https://github.com/TreasureUzoma/Link-Lite"
                             target="_blank"
-                            className="border border-1 border-[#545454] text-[#525252] rounded-3xl px-5 py-2 z-40 text-[0.65rem] font-inter font-semibold"
+                            className="border border-1 border-[#545454] text-[#525252] rounded-3xl px-5 py-2 z-40 text-[0.65rem] font-inter bg-[#fefefe] font-semibold"
                         >
                             Proudly Open Source ⚡
                         </a>
