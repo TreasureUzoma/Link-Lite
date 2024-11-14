@@ -1,13 +1,11 @@
 import Nav from "./components/Nav"
-import Hero from "./components/Hero"
-import Main from "./components/Main"
+import MainWithHero from "./components/MainWithHero"
 
 const App = () => {
   return (
       <>
         <Nav />
-        <Hero />
-        <Main />
+        <MainWithHero />
       </>
     )
 }
