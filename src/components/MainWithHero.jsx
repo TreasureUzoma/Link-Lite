@@ -13,7 +13,8 @@ const MainWithHero = () => {
         setLink(e.target.value);
     };
 
-    const handleShortenClick = () => {
+    const handleShortenClick = async () => {
+      // yh, wtf understands regex? ai :)
         const isValidLink =
             /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(\/[^\s]*)?(\?[^\s]*)?(#[^\s]*)?$/.test(
                 link
@@ -22,7 +23,36 @@ const MainWithHero = () => {
         if (isValidLink) {
             setMessage("");
             setMessageType("success");
-            setShortenedLink("http://shortened.link"); // Mock shortened URL for now
+            setLoading(true);
+
+            try {
+                const response = await fetch("https://api.tinyurl.com/create", {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${
+                            import.meta.env.VITE_API_KEY
+                        }`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ url: link })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Failed with status ${response.status}`);
+                }
+
+                const data = await response.json();
+                setShortenedLink(data.data.tiny_url);
+                setMessage("Link successfully shortened!");
+            } catch (error) {
+                setMessage(
+                    "Failed to shorten the link. Please try again. " +
+                        error.message
+                );
+                setMessageType("error");
+            } finally {
+                setLoading(false);
+            }
         } else {
             setMessage("Please enter a valid URL");
             setMessageType("error");
@@ -45,19 +75,19 @@ const MainWithHero = () => {
             <main className="h-[40rem] w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex items-center justify-center">
                 <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
                 <div className="flex text-center flex-col gap-[1.75rem] w-[315px] md:w-[500px] lg:w-[680px] -mt-[4.6rem] sm:mt-0">
-                    <div>
+                    <div className="sm:mb-3">
                         <a
                             href="https://github.com/TreasureUzoma/Link-Lite"
                             target="_blank"
-                            className="border border-1 border-[#545454] text-[#525252] rounded-3xl px-5 py-2 text-[0.65rem] font-inter font-semibold"
+                            className="border border-1 border-[#545454] text-[#525252] rounded-3xl px-5 py-2 z-40 text-[0.65rem] font-inter font-semibold"
                         >
                             Proudly Open Source ⚡
                         </a>
                     </div>
-                    <h1 className="font-[900] text-[2.6rem] md:text-[3rem]">
+                    <h1 className="font-[900] text-[2.6rem] md:text-[3rem] z-40">
                         LinkLite.
                     </h1>
-                    <p className="text-[1rem] text-[#717076] font-medium">
+                    <p className="text-[1rem] text-[#717076] font-medium z-40 md:mb-3">
                         Easily transform, long, cumbersome links into concise,
                         personalized URLs that reflect your brand.
                     </p>
@@ -72,15 +102,20 @@ const MainWithHero = () => {
                         <button
                             className="bg-[#474747] text-white py-3 px-4 rounded-lg text-[0.8rem] z-40"
                             onClick={handleShortenClick}
+                            disabled={loading}
                         >
-                            Shorten
+                            {loading ? (
+                                <div className="w-3 h-3 border-2 border-t-4 border-gray-300 border-t-gray-800 rounded-full animate-spin"></div> // Spinner loader
+                            ) : (
+                                "Shorten"
+                            )}
                         </button>
                     </div>
 
                     {/* Show the success or error message */}
                     {message && (
                         <p
-                            className={`text-[0.8rem] mt-2 ${
+                            className={`text-[0.8rem] z-40 mt-2 ${
                                 messageType === "success" ? "" : "text-red-500"
                             }`}
                         >
@@ -88,19 +123,17 @@ const MainWithHero = () => {
                         </p>
                     )}
 
-                    {/* Example of a shortened link and dynamic icon */}
-                    <div className="flex justify-center space-x-4 mt-4">
-                        {messageType === "success" && (
-                            <>
-                                <p className="font-semibold text-[0.84rem]">
-                                    {shortenedLink}
-                                </p>
-                                <button onClick={handleCopyClick}>
-                                    <SvgIcons color="#474747" type={iconType} />
-                                </button>
-                            </>
-                        )}
-                    </div>
+                    {/* Only show this block if a shortened link exists */}
+                    {shortenedLink && messageType === "success" && (
+                        <div className="flex justify-center space-x-4 mt-4">
+                            <p className="font-semibold text-[0.84rem]">
+                                {shortenedLink}
+                            </p>
+                            <button onClick={handleCopyClick}>
+                                <SvgIcons color="#474747" type={iconType} />
+                            </button>
+                        </div>
+                    )}
                 </div>
             </main>
         </div>
