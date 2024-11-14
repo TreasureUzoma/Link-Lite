@@ -93,7 +93,7 @@ const MainWithHero = () => {
                     <div className="flex items-center justify-center space-x-2">
                         <input
                             type="url"
-                            className="border border-1 rounded-lg w-full p-3 text-[0.8rem] font-medium placeholder:text-[#909092] z-40"
+                            className="border border-1 rounded-lg w-full p-3 text-[0.8rem] font-medium focus: outline-2 focus:outline-[#474747] placeholder:text-[#909092] z-40"
                             value={link}
                             onChange={handleLinkChange}
                             placeholder="Enter Website URL"
