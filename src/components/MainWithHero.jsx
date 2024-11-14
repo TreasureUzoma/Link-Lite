@@ -14,7 +14,7 @@ const MainWithHero = () => {
     };
 
     const handleShortenClick = async () => {
-      // yh, wtf understands regex? ai :)
+        // yh, wtf understands regex? ai :)
         const isValidLink =
             /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(\/[^\s]*)?(\?[^\s]*)?(#[^\s]*)?$/.test(
                 link
@@ -29,9 +29,7 @@ const MainWithHero = () => {
                 const response = await fetch("https://api.tinyurl.com/create", {
                     method: "POST",
                     headers: {
-                        Authorization: `Bearer ${
-                            import.meta.env.VITE_API_KEY
-                        }`,
+                        Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({ url: link })
