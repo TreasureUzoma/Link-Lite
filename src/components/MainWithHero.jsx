@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SvgIcons from "./icons/SvgIcons";
+import { motion } from "framer-motion";
 
 const MainWithHero = () => {
     const [link, setLink] = useState("");
@@ -68,29 +69,55 @@ const MainWithHero = () => {
             setIconType("copy");
         }, 2000);
     };
-
+    
+   // cool animations cus im learning franer motion
+       const variants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 },
+    };
+    
     return (
         <div>
             <main className="h-[40rem] w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex items-center justify-center">
                 <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
                 <div className="flex text-center flex-col gap-[1.75rem] w-[315px] md:w-[500px] lg:w-[680px] -mt-[4.8rem] sm:-mt-[2.5rem]">
                     <div className="sm:mb-3">
-                        <a
+                        <motion.a
                             href="https://github.com/TreasureUzoma/Link-Lite"
                             target="_blank"
-                            className="border border-1 border-[#545454] text-[#525252] rounded-3xl px-5 py-2 z-40 text-[0.65rem] font-inter bg-[#fefefe] font-semibold"
+                            initial="hidden"
+                    animate="visible"
+                    variants={variants}
+                    transition={{ duration: 0.5 }}
+                            className="border border-1 border-[#545454] text-[#525252] rounded-3xl px-5 py-2 z-40 text-[0.65rem] font-inter inline-block bg-[#fefefe] font-semibold"
                         >
                             Proudly Open Source ⚡
-                        </a>
+                        </motion.a>
                     </div>
-                    <h1 className="font-[900] text-[2.6rem] md:text-[3rem] z-40">
+                    <motion.h1
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ duration: 0.5, delay : 0.3 }}
+                        variants={variants}
+                        className="font-[900] text-[2.6rem] md:text-[3rem] z-40"
+                    >
                         LinkLite.
-                    </h1>
-                    <p className="text-[1rem] text-[#717076] font-medium z-40 md:mb-3">
+                    </motion.h1>
+                    <motion.p
+                    initial="hidden"
+                    animate="visible"
+                    variants={variants}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                    className="text-[1rem] text-[#717076] font-medium z-40 md:mb-3">
                         Easily transform, long, cumbersome links into concise,
                         personalized URLs that reflect your brand.
-                    </p>
-                    <div className="flex items-center justify-center space-x-2">
+                    </motion.p>
+                    <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={variants}
+                    transition={{ duration: 0.5, delay: 0.9 }}
+                    className="flex items-center justify-center space-x-2">
                         <input
                             type="url"
                             className="border border-1 rounded-lg w-full p-3 text-[0.8rem] font-medium focus: outline-2 focus:outline-[#474747] placeholder:text-[#909092] z-40"
@@ -109,7 +136,7 @@ const MainWithHero = () => {
                                 "Shorten"
                             )}
                         </button>
-                    </div>
+                    </motion.div>
 
                     {/* Show the success or error message */}
                     {message && (
